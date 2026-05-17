@@ -39,14 +39,23 @@ class Ball extends CircleComponent
   @override
   void update(double dt) {
     super.update(dt);
+
+    if (game.playState != PlayState.playing) return;
+
     position += velocity * dt;
 
     if (position.x < -radius) {
       game.scoreRightPlayer();
-      reset();
+
+      if (game.playState == PlayState.playing) {
+        reset();
+      }
     } else if (position.x > game.width + radius) {
       game.scoreLeftPlayer();
-      reset();
+
+      if (game.playState == PlayState.playing) {
+        reset();
+      }
     }
   }
 
