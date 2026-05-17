@@ -8,7 +8,7 @@ import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 
-import '../brick_breaker.dart';
+import '../pong_game.dart';
 
 class Paddle extends PositionComponent
     with DragCallbacks, HasGameReference<BrickBreaker> {
