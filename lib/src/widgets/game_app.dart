@@ -61,21 +61,24 @@ class _GameAppState extends State<GameApp> {
                           child: GameWidget(
                             game: game,
                             overlayBuilderMap: {
-                              PlayState.welcome.name: (context, game) =>
-                                  const OverlayScreen(
-                                    title: 'TAP TO PLAY',
-                                    subtitle: 'Use arrow keys or swipe',
-                                  ),
-                              PlayState.gameOver.name: (context, game) =>
-                                  const OverlayScreen(
-                                    title: 'G A M E   O V E R',
-                                    subtitle: 'Tap to Play Again',
-                                  ),
-                              PlayState.won.name: (context, game) =>
-                                  const OverlayScreen(
-                                    title: 'Y O U   W O N ! ! !',
-                                    subtitle: 'Tap to Play Again',
-                                  ),
+                              PlayState.welcome.name: (context, game) => const OverlayScreen(
+                                title: 'P O N G',
+                                subtitle: 'J1: W/S o A/D    J2: ↑/↓ o ←/→\nPulsa Enter, espacio o click para empezar',
+                              ),
+
+                              PlayState.gameOver.name: (context, game) => const OverlayScreen(
+                                title: 'F I N   D E   P A R T I D A',
+                                subtitle: 'Pulsa Enter, espacio o click para jugar otra vez',
+                              ),
+
+                              PlayState.won.name: (context, game) {
+                                final brickBreaker = game as BrickBreaker;
+
+                                return OverlayScreen(
+                                  title: brickBreaker.winnerText,
+                                  subtitle: 'Pulsa Enter, espacio o click para jugar otra vez',
+                                );
+                              },
                             },
                           ),
                         ),

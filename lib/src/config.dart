@@ -13,3 +13,5 @@ const paddleHeight = gameHeight * 0.15;
 const paddleStep = gameHeight * 0.04;
 
 const difficultyModifier = 1.03;
+
+const winningScore = 7;

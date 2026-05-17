@@ -29,6 +29,7 @@ class BrickBreaker extends FlameGame
 
   int leftPlayerScore = 0;
   int rightPlayerScore = 0;
+  String winnerText = '';
 
   late Paddle leftPaddle;
   late Paddle rightPaddle;
@@ -73,8 +74,10 @@ class BrickBreaker extends FlameGame
     world.removeAll(world.children.query<Paddle>());
 
     playState = PlayState.playing;
+
     leftPlayerScore = 0;
     rightPlayerScore = 0;
+    winnerText = '';
     score.value = '$leftPlayerScore - $rightPlayerScore';
 
     world.add(Ball(radius: ballRadius, position: size / 2, speed: ballSpeed));
@@ -96,13 +99,27 @@ class BrickBreaker extends FlameGame
   }
 
   void scoreLeftPlayer() {
+    if (playState != PlayState.playing) return;
+
     leftPlayerScore++;
     score.value = '$leftPlayerScore - $rightPlayerScore';
+
+    if (leftPlayerScore >= winningScore) {
+      winnerText = 'Jugador 1 gana';
+      playState = PlayState.won;
+    }
   }
 
   void scoreRightPlayer() {
+    if (playState != PlayState.playing) return;
+
     rightPlayerScore++;
     score.value = '$leftPlayerScore - $rightPlayerScore';
+
+    if (rightPlayerScore >= winningScore) {
+      winnerText = 'Jugador 2 gana';
+      playState = PlayState.won;
+    }
   }
 
   @override
