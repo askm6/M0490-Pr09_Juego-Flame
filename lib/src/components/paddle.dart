@@ -16,13 +16,14 @@ class Paddle extends PositionComponent
     required this.cornerRadius,
     required super.position,
     required super.size,
-  }) : super(anchor: Anchor.center, children: [RectangleHitbox()]);
+    required Color color,
+  }) : _paint = Paint()
+         ..color = color
+         ..style = PaintingStyle.fill,
+       super(anchor: Anchor.center, children: [RectangleHitbox()]);
 
   final Radius cornerRadius;
-
-  final _paint = Paint()
-    ..color = const Color(0xff1e6091)
-    ..style = PaintingStyle.fill;
+  final Paint _paint;
 
   @override
   void render(Canvas canvas) {

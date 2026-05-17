@@ -21,7 +21,10 @@ class ScoreCard extends StatelessWidget {
           return Text(
             'P1   $value   P2',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              color: const Color(0xfff8f9fa),
+              fontWeight: FontWeight.bold,
+            ),
           );
         },
       ),

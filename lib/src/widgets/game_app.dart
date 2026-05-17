@@ -38,54 +38,53 @@ class _GameAppState extends State<GameApp> {
         ),
       ),
       home: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xffa9d6e5), Color(0xfff2e8cf)],
-            ),
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Center(
-                child: Column(
-                  children: [
-                    ScoreCard(score: game.score),
-                    Expanded(
-                      child: FittedBox(
-                        child: SizedBox(
-                          width: gameWidth,
-                          height: gameHeight,
-                          child: GameWidget(
-                            game: game,
-                            overlayBuilderMap: {
-                              PlayState.welcome.name: (context, game) => const OverlayScreen(
-                                title: 'P O N G',
-                                subtitle: 'J1: W/S o A/D    J2: ↑/↓ o ←/→\nPulsa Enter, espacio o click para empezar',
-                              ),
+        backgroundColor: const Color(0xff0b132b),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Center(
+              child: Column(
+                children: [
+                  ScoreCard(score: game.score),
+                  Expanded(
+                    child: FittedBox(
+                      child: SizedBox(
+                        width: gameWidth,
+                        height: gameHeight,
+                        child: GameWidget(
+                          game: game,
+                          overlayBuilderMap: {
+                            PlayState
+                                .welcome
+                                .name: (context, game) => const OverlayScreen(
+                              title: 'P O N G',
+                              subtitle:
+                                  'J1: W/S o A/D    J2: ↑/↓ o ←/→\nPulsa Enter, espacio o click para empezar',
+                            ),
 
-                              PlayState.gameOver.name: (context, game) => const OverlayScreen(
-                                title: 'F I N   D E   P A R T I D A',
-                                subtitle: 'Pulsa Enter, espacio o click para jugar otra vez',
-                              ),
+                            PlayState
+                                .gameOver
+                                .name: (context, game) => const OverlayScreen(
+                              title: 'F I N   D E   P A R T I D A',
+                              subtitle:
+                                  'Pulsa Enter, espacio o click para jugar otra vez',
+                            ),
 
-                              PlayState.won.name: (context, game) {
-                                final brickBreaker = game as BrickBreaker;
+                            PlayState.won.name: (context, game) {
+                              final brickBreaker = game as BrickBreaker;
 
-                                return OverlayScreen(
-                                  title: brickBreaker.winnerText,
-                                  subtitle: 'Pulsa Enter, espacio o click para jugar otra vez',
-                                );
-                              },
+                              return OverlayScreen(
+                                title: brickBreaker.winnerText,
+                                subtitle:
+                                    'Pulsa Enter, espacio o click para jugar otra vez',
+                              );
                             },
-                          ),
+                          },
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
