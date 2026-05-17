@@ -12,18 +12,25 @@ import '../brick_breaker.dart';
 
 class PlayArea extends RectangleComponent with HasGameReference<BrickBreaker> {
   PlayArea()
-      : _borderPaint = Paint()
-          ..color = const Color(0x66f8f9fa)
+      : _fillPaint = Paint()
+          ..color = const Color(0xff0b132b)
+          ..style = PaintingStyle.fill,
+        _borderPaint = Paint()
+          ..color = const Color(0xccf8f9fa)
           ..style = PaintingStyle.stroke
           ..strokeWidth = 4,
+        _innerBorderPaint = Paint()
+          ..color = const Color(0x3300ffff)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 10,
         super(
-          paint: Paint()
-            ..color = const Color(0xff0b132b)
-            ..style = PaintingStyle.fill,
+          paint: Paint()..color = Colors.transparent,
           children: [RectangleHitbox()],
         );
 
+  final Paint _fillPaint;
   final Paint _borderPaint;
+  final Paint _innerBorderPaint;
 
   @override
   FutureOr<void> onLoad() async {
@@ -33,11 +40,14 @@ class PlayArea extends RectangleComponent with HasGameReference<BrickBreaker> {
 
   @override
   void render(Canvas canvas) {
-    super.render(canvas);
-
-    canvas.drawRect(
-      Offset.zero & size.toSize(),
-      _borderPaint,
+    final area = Offset.zero & size.toSize();
+    final roundedArea = RRect.fromRectAndRadius(
+      area.deflate(2),
+      const Radius.circular(18),
     );
+
+    canvas.drawRRect(roundedArea, _fillPaint);
+    canvas.drawRRect(roundedArea, _innerBorderPaint);
+    canvas.drawRRect(roundedArea, _borderPaint);
   }
 }

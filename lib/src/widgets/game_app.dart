@@ -41,7 +41,7 @@ class _GameAppState extends State<GameApp> {
         backgroundColor: const Color(0xff0b132b),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(24),
             child: Center(
               child: Column(
                 children: [
@@ -59,7 +59,7 @@ class _GameAppState extends State<GameApp> {
                                 .name: (context, game) => const OverlayScreen(
                               title: 'P O N G',
                               subtitle:
-                                  'J1: W/S o A/D    J2: ↑/↓ o ←/→\nPulsa Enter, espacio o click para empezar',
+                                  'Jugador 1: W/S o A/D\nJugador 2: ↑/↓ o ←/→\n\nPulsa Enter, espacio o click para empezar',
                             ),
 
                             PlayState
