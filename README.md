@@ -62,6 +62,7 @@ Cambios principales:
 - Se añadió condición de victoria a 7 puntos.
 - Se añadió dificultad progresiva.
 - Se modificaron los elementos visuales del juego.
+- Se renombró la clase principal del juego a `PongGame`.
 
 ## Estructura principal del proyecto
 
@@ -69,7 +70,7 @@ Cambios principales:
 lib/
  ├─ main.dart
  └─ src/
-    ├─ brick_breaker.dart
+    ├─ pong_game.dart
     ├─ config.dart
     ├─ components/
     │  ├─ ball.dart

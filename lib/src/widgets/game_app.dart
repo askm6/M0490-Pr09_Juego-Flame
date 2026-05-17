@@ -6,7 +6,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../brick_breaker.dart';
+import '../pong_game.dart';
 import '../config.dart';
 import 'overlay_screen.dart';
 import 'score_card.dart';

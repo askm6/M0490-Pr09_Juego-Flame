@@ -8,7 +8,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-import '../brick_breaker.dart';
+import '../pong_game.dart';
 import '../config.dart';
 import 'paddle.dart';
 import 'play_area.dart';
