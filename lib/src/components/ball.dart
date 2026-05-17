@@ -14,19 +14,16 @@ import 'play_area.dart';
 
 class Ball extends CircleComponent
     with CollisionCallbacks, HasGameReference<BrickBreaker> {
-  Ball({
-    required super.position,
-    required double radius,
-    required double speed,
-  }) : _speed = speed,
-       super(
-         radius: radius,
-         anchor: Anchor.center,
-         paint: Paint()
-           ..color = const Color(0xff1e6091)
-           ..style = PaintingStyle.fill,
-         children: [CircleHitbox()],
-       );
+  Ball({required super.position, required double radius, required double speed})
+    : _speed = speed,
+      super(
+        radius: radius,
+        anchor: Anchor.center,
+        paint: Paint()
+          ..color = const Color(0xff1e6091)
+          ..style = PaintingStyle.fill,
+        children: [CircleHitbox()],
+      );
 
   final double _speed;
   final _random = math.Random();
@@ -43,6 +40,14 @@ class Ball extends CircleComponent
   void update(double dt) {
     super.update(dt);
     position += velocity * dt;
+
+    if (position.x < -radius) {
+      game.scoreRightPlayer();
+      reset();
+    } else if (position.x > game.width + radius) {
+      game.scoreLeftPlayer();
+      reset();
+    }
   }
 
   void reset() {
@@ -97,8 +102,7 @@ class Ball extends CircleComponent
       position.x = paddle.position.x - paddle.size.x / 2 - radius;
     }
 
-    final hitPosition =
-        (position.y - paddle.position.y) / (paddle.size.y / 2);
+    final hitPosition = (position.y - paddle.position.y) / (paddle.size.y / 2);
 
     velocity.y = hitPosition.clamp(-1.0, 1.0) * _speed * 0.75;
   }

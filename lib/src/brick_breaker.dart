@@ -18,15 +18,18 @@ enum PlayState { welcome, playing, gameOver, won }
 class BrickBreaker extends FlameGame
     with HasCollisionDetection, KeyboardEvents, TapCallbacks {
   BrickBreaker()
-      : super(
-          camera: CameraComponent.withFixedResolution(
-            width: gameWidth,
-            height: gameHeight,
-          ),
-        );
+    : super(
+        camera: CameraComponent.withFixedResolution(
+          width: gameWidth,
+          height: gameHeight,
+        ),
+      );
 
-  final ValueNotifier<int> score = ValueNotifier(0);
-  
+  final ValueNotifier<String> score = ValueNotifier('0 - 0');
+
+  int leftPlayerScore = 0;
+  int rightPlayerScore = 0;
+
   late Paddle leftPaddle;
   late Paddle rightPaddle;
 
@@ -70,15 +73,11 @@ class BrickBreaker extends FlameGame
     world.removeAll(world.children.query<Paddle>());
 
     playState = PlayState.playing;
-    score.value = 0;
+    leftPlayerScore = 0;
+    rightPlayerScore = 0;
+    score.value = '$leftPlayerScore - $rightPlayerScore';
 
-    world.add(
-      Ball(
-        radius: ballRadius,
-        position: size / 2,
-        speed: ballSpeed,
-      ),
-    );
+    world.add(Ball(radius: ballRadius, position: size / 2, speed: ballSpeed));
 
     leftPaddle = Paddle(
       size: Vector2(paddleWidth, paddleHeight),
@@ -94,6 +93,16 @@ class BrickBreaker extends FlameGame
 
     world.add(leftPaddle);
     world.add(rightPaddle);
+  }
+
+  void scoreLeftPlayer() {
+    leftPlayerScore++;
+    score.value = '$leftPlayerScore - $rightPlayerScore';
+  }
+
+  void scoreRightPlayer() {
+    rightPlayerScore++;
+    score.value = '$leftPlayerScore - $rightPlayerScore';
   }
 
   @override
