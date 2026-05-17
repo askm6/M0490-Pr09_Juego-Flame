@@ -65,13 +65,41 @@ class Ball extends CircleComponent
     super.onCollisionStart(intersectionPoints, other);
 
     if (other is PlayArea) {
-      if (intersectionPoints.first.y <= 0) {
-        velocity.y = -velocity.y;
-      } else if (intersectionPoints.first.y >= game.height) {
-        velocity.y = -velocity.y;
-      }
+      _handlePlayAreaCollision(intersectionPoints.first);
     } else if (other is Paddle) {
-      velocity.x = -velocity.x;
+      _handlePaddleCollision(other);
     }
+  }
+
+  void _handlePlayAreaCollision(Vector2 collisionPoint) {
+    final isTopCollision = collisionPoint.y <= 0;
+    final isBottomCollision = collisionPoint.y >= game.height;
+
+    if (isTopCollision && velocity.y < 0) {
+      velocity.y = -velocity.y;
+      position.y = radius;
+    }
+
+    if (isBottomCollision && velocity.y > 0) {
+      velocity.y = -velocity.y;
+      position.y = game.height - radius;
+    }
+  }
+
+  void _handlePaddleCollision(Paddle paddle) {
+    final isLeftPaddle = paddle.position.x < game.width / 2;
+
+    if (isLeftPaddle && velocity.x < 0) {
+      velocity.x = _speed;
+      position.x = paddle.position.x + paddle.size.x / 2 + radius;
+    } else if (!isLeftPaddle && velocity.x > 0) {
+      velocity.x = -_speed;
+      position.x = paddle.position.x - paddle.size.x / 2 - radius;
+    }
+
+    final hitPosition =
+        (position.y - paddle.position.y) / (paddle.size.y / 2);
+
+    velocity.y = hitPosition.clamp(-1.0, 1.0) * _speed * 0.75;
   }
 }
