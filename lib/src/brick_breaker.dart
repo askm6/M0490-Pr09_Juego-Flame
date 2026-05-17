@@ -63,6 +63,7 @@ class BrickBreaker extends FlameGame
     camera.viewfinder.anchor = Anchor.topLeft;
 
     world.add(PlayArea());
+    world.add(CenterLine());
 
     playState = PlayState.welcome;
   }
@@ -86,12 +87,14 @@ class BrickBreaker extends FlameGame
       size: Vector2(paddleWidth, paddleHeight),
       cornerRadius: const Radius.circular(ballRadius / 2),
       position: Vector2(width * 0.08, height / 2),
+      color: const Color(0xff5bc0be),
     );
 
     rightPaddle = Paddle(
       size: Vector2(paddleWidth, paddleHeight),
       cornerRadius: const Radius.circular(ballRadius / 2),
       position: Vector2(width * 0.92, height / 2),
+      color: const Color(0xffffb703),
     );
 
     world.add(leftPaddle);
@@ -168,5 +171,5 @@ class BrickBreaker extends FlameGame
   }
 
   @override
-  Color backgroundColor() => const Color(0xfff2e8cf);
+  Color backgroundColor() => const Color(0xff0b132b);
 }

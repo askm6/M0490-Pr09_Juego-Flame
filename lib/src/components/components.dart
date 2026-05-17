@@ -3,5 +3,6 @@
 // found in the LICENSE file.
 
 export 'ball.dart';
+export 'center_line.dart';
 export 'paddle.dart';
 export 'play_area.dart';
