@@ -9,6 +9,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 import '../brick_breaker.dart';
+import '../config.dart';
 import 'paddle.dart';
 import 'play_area.dart';
 
@@ -28,6 +29,7 @@ class Ball extends CircleComponent
   final double _speed;
   final _random = math.Random();
 
+  late double currentSpeed;
   late Vector2 velocity;
 
   @override
@@ -61,13 +63,14 @@ class Ball extends CircleComponent
 
   void reset() {
     position = game.size / 2;
+    currentSpeed = _speed;
 
     final horizontalDirection = _random.nextBool() ? 1.0 : -1.0;
     final verticalDirection = _random.nextBool() ? 1.0 : -1.0;
 
     velocity = Vector2(
-      horizontalDirection * _speed,
-      verticalDirection * _speed * 0.5,
+      horizontalDirection * currentSpeed,
+      verticalDirection * currentSpeed * 0.5,
     );
   }
 
@@ -103,16 +106,19 @@ class Ball extends CircleComponent
   void _handlePaddleCollision(Paddle paddle) {
     final isLeftPaddle = paddle.position.x < game.width / 2;
 
+    currentSpeed *= difficultyModifier;
+
     if (isLeftPaddle && velocity.x < 0) {
-      velocity.x = _speed;
+      velocity.x = currentSpeed;
       position.x = paddle.position.x + paddle.size.x / 2 + radius;
     } else if (!isLeftPaddle && velocity.x > 0) {
-      velocity.x = -_speed;
+      velocity.x = -currentSpeed;
       position.x = paddle.position.x - paddle.size.x / 2 - radius;
     }
 
-    final hitPosition = (position.y - paddle.position.y) / (paddle.size.y / 2);
+    final hitPosition =
+        (position.y - paddle.position.y) / (paddle.size.y / 2);
 
-    velocity.y = hitPosition.clamp(-1.0, 1.0) * _speed * 0.75;
+    velocity.y = hitPosition.clamp(-1.0, 1.0) * currentSpeed * 0.75;
   }
 }
