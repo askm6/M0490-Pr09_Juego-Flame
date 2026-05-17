@@ -3,10 +3,13 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class OverlayScreen extends StatelessWidget {
-  const OverlayScreen({super.key, required this.title, required this.subtitle});
+  const OverlayScreen({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
 
   final String title;
   final String subtitle;
@@ -14,21 +17,42 @@ class OverlayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: const Alignment(0, -0.15),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.headlineLarge,
-          ).animate().slideY(duration: 750.ms, begin: -3, end: 0),
-          const SizedBox(height: 16),
-          Text(subtitle, style: Theme.of(context).textTheme.headlineSmall)
-              .animate(onPlay: (controller) => controller.repeat())
-              .fadeIn(duration: 1.seconds)
-              .then()
-              .fadeOut(duration: 1.seconds),
-        ],
+      color: const Color(0x990b132b),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 900),
+          padding: const EdgeInsets.all(32),
+          decoration: BoxDecoration(
+            color: const Color(0xcc0b132b),
+            border: Border.all(
+              color: const Color(0x99f8f9fa),
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: const Color(0xfff8f9fa),
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: const Color(0xfff8f9fa),
+                      height: 1.8,
+                    ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
