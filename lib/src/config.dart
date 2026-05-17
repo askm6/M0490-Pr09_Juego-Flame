@@ -2,15 +2,15 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-const gameWidth = 820.0;
-const gameHeight = 1600.0;
+const gameWidth = 1600.0;
+const gameHeight = 900.0;
 
-const ballRadius = gameWidth * 0.02;
-const ballSpeed = gameWidth * 0.55;
+const ballRadius = gameHeight * 0.025;
+const ballSpeed = gameWidth * 0.45;
 
-const paddleWidth = gameWidth * 0.025;
-const paddleHeight = gameHeight * 0.15;
-const paddleStep = gameHeight * 0.04;
+const paddleWidth = gameWidth * 0.015;
+const paddleHeight = gameHeight * 0.22;
+const paddleStep = gameHeight * 0.06;
 
 const difficultyModifier = 1.03;
 

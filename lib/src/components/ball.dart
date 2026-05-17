@@ -116,8 +116,7 @@ class Ball extends CircleComponent
       position.x = paddle.position.x - paddle.size.x / 2 - radius;
     }
 
-    final hitPosition =
-        (position.y - paddle.position.y) / (paddle.size.y / 2);
+    final hitPosition = (position.y - paddle.position.y) / (paddle.size.y / 2);
 
     velocity.y = hitPosition.clamp(-1.0, 1.0) * currentSpeed * 0.75;
   }
